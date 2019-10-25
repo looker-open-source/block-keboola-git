@@ -1,11 +1,13 @@
 view: repository {
-  sql_table_name: WORKSPACE_545895473.REPOSITORY ;;
-  drill_fields: [repository_id]
+  sql_table_name: @{SCHEMA_NAME}.REPOSITORY ;;
+  drill_fields: [repository]
 
   dimension: repository_id {
+    label: "Repository ID"
     primary_key: yes
     type: string
     sql: ${TABLE}."REPOSITORY_ID" ;;
+    html: <a href={{url}} target="_blank"><font color="blue">{{ value }}</font></a> ;;
   }
 
   dimension_group: created {
@@ -28,23 +30,23 @@ view: repository {
   }
 
   dimension: has_issues {
-    type: string
-    sql: ${TABLE}."HAS_ISSUES" ;;
+    type: yesno
+    sql: ${TABLE}."HAS_ISSUES" = 'true' ;;
   }
 
   dimension: has_wiki {
-    type: string
-    sql: ${TABLE}."HAS_WIKI" ;;
+    type: yesno
+    sql: ${TABLE}."HAS_WIKI" = 'true' ;;
   }
 
   dimension: is_looker {
-    type: string
-    sql: ${TABLE}."IS_LOOKER" ;;
+    type: yesno
+    sql: ${TABLE}."IS_LOOKER" = 'true' ;;
   }
 
   dimension: is_private {
-    type: string
-    sql: ${TABLE}."IS_PRIVATE" ;;
+    type: yesno
+    sql: ${TABLE}."IS_PRIVATE" = 'true' ;;
   }
 
   dimension: language {
@@ -60,6 +62,7 @@ view: repository {
   dimension: repository {
     type: string
     sql: ${TABLE}."REPOSITORY" ;;
+    html: <a href={{url}} target="_blank"><font color="blue">{{ value }}</font></a> ;;
   }
 
   dimension: url {
@@ -67,8 +70,23 @@ view: repository {
     sql: ${TABLE}."URL" ;;
   }
 
-  measure: count {
+  measure: repositories {
     type: count
-    drill_fields: [repository_id, issue.count, pull_request.count, repository_commit.count]
+    drill_fields: [detail*]
+  }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      organization.organization,
+      project,
+      repository,
+      description,
+      created_date,
+      language,
+      pull_request.pull_requests,
+      repository_commit.commits,
+      issue.issues
+    ]
   }
 }

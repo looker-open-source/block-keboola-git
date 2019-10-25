@@ -1,8 +1,8 @@
 view: user {
-  sql_table_name: WORKSPACE_545895473."USER" ;;
-  drill_fields: [user_id]
+  sql_table_name: @{SCHEMA_NAME}."USER" ;;
 
   dimension: user_id {
+    label: "User ID"
     primary_key: yes
     type: string
     sql: ${TABLE}."USER_ID" ;;
@@ -23,18 +23,18 @@ view: user {
   }
 
   dimension: is_active {
-    type: string
-    sql: ${TABLE}."IS_ACTIVE" ;;
+    type: yesno
+    sql: ${TABLE}."IS_ACTIVE" = 'true' ;;
   }
 
   dimension: is_member {
-    type: string
-    sql: ${TABLE}."IS_MEMBER" ;;
+    type: yesno
+    sql: ${TABLE}."IS_MEMBER" = 'true' ;;
   }
 
   dimension: organization_id {
     type: string
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}."ORGANIZATION_ID" ;;
   }
 
@@ -48,7 +48,7 @@ view: user {
     sql: ${TABLE}."USER" ;;
   }
 
-  measure: count {
+  measure: users {
     type: count
     drill_fields: [detail*]
   }
@@ -56,13 +56,13 @@ view: user {
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-      user_id,
-      organization.organization_id,
-      issue.count,
-      issue_comment.count,
-      pull_request.count,
-      pull_request_activity.count,
-      repository_commit.count
+      organization.organization,
+      user,
+      issue.issues,
+      issue_comment.issue_comments,
+      pull_request.pull_requests,
+      pull_request_activity.pull_request_activities,
+      repository_commit.commits
     ]
   }
 }

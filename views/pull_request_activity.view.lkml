@@ -1,8 +1,8 @@
 view: pull_request_activity {
-  sql_table_name: WORKSPACE_545895473.PULL_REQUEST_ACTIVITY ;;
-  drill_fields: [pull_request_activity_id]
+  sql_table_name: @{SCHEMA_NAME}.PULL_REQUEST_ACTIVITY ;;
 
   dimension: pull_request_activity_id {
+    label: "Pull Request Activity ID"
     primary_key: yes
     type: string
     sql: ${TABLE}."PULL_REQUEST_ACTIVITY_ID" ;;
@@ -29,7 +29,7 @@ view: pull_request_activity {
 
   dimension: pull_request_id {
     type: string
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}."PULL_REQUEST_ID" ;;
   }
 
@@ -50,12 +50,26 @@ view: pull_request_activity {
 
   dimension: user_id {
     type: string
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}."USER_ID" ;;
   }
 
-  measure: count {
+  measure: pull_request_activities {
     type: count
-    drill_fields: [pull_request_activity_id, pull_request.pull_request_id, user.user_id]
+    drill_fields: [detail*]
+  }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      organization.organization,
+      repository.repository,
+      users.user,
+      date_date,
+      pull_request_activity_id,
+      title,
+      state,
+      reason
+    ]
   }
 }

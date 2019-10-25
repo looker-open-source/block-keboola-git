@@ -1,11 +1,13 @@
 view: issue {
-  sql_table_name: WORKSPACE_545895473.ISSUE ;;
-  drill_fields: [issue_id]
+  sql_table_name: @{SCHEMA_NAME}.ISSUE ;;
+  drill_fields: [issue_id, title]
 
   dimension: issue_id {
+    label: "Issue ID"
     primary_key: yes
     type: string
     sql: ${TABLE}."ISSUE_ID" ;;
+    html: <a href={{url}} target="_blank"><font color="blue">{{ value }}</font></a> ;;
   }
 
   dimension_group: created {
@@ -49,7 +51,7 @@ view: issue {
 
   dimension: repository_id {
     type: string
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}."REPOSITORY_ID" ;;
   }
 
@@ -61,6 +63,7 @@ view: issue {
   dimension: title {
     type: string
     sql: ${TABLE}."TITLE" ;;
+    html: <a href={{url}} target="_blank"><font color="blue">{{ value }}</font></a> ;;
   }
 
   dimension_group: updated {
@@ -84,12 +87,25 @@ view: issue {
 
   dimension: user_id {
     type: string
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}."USER_ID" ;;
   }
 
-  measure: count {
+  measure: issues {
     type: count
-    drill_fields: [issue_id, repository.repository_id, user.user_id, issue_comment.count]
+    drill_fields: [detail*]
+  }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      organization.organization,
+      user.user,
+      repository.repository,
+      issue_id,
+      created_date,
+      updated_date,
+      issue_comment.issue_comments
+    ]
   }
 }

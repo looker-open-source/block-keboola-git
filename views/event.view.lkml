@@ -1,12 +1,12 @@
-view: repository_commit {
-  sql_table_name: @{SCHEMA_NAME}.REPOSITORY_COMMIT ;;
-  drill_fields: [repository_commit_id]
+view: event {
+  sql_table_name: @{SCHEMA_NAME}.EVENT ;;
+  drill_fields: [event_id]
 
-  dimension: repository_commit_id {
-    label: "Repository Commit ID"
+  dimension: event_id {
+    label: "Event ID"
     primary_key: yes
     type: string
-    sql: ${TABLE}."REPOSITORY_COMMIT_ID" ;;
+    sql: ${TABLE}."EVENT_ID" ;;
     html: <a href={{url}} target="_blank"><font color="blue">{{ value }}</font></a> ;;
   }
 
@@ -24,9 +24,9 @@ view: repository_commit {
     sql: ${TABLE}."DATE" ;;
   }
 
-  dimension: message {
+  dimension: event {
     type: string
-    sql: ${TABLE}."MESSAGE" ;;
+    sql: ${TABLE}."EVENT" ;;
   }
 
   dimension: repository_id {
@@ -42,11 +42,10 @@ view: repository_commit {
 
   dimension: user_id {
     type: string
-    hidden: yes
     sql: ${TABLE}."USER_ID" ;;
   }
 
-  measure: commits {
+  measure: events {
     type: count
     drill_fields: [detail*]
   }
@@ -55,13 +54,11 @@ view: repository_commit {
   set: detail {
     fields: [
       organization.organization,
-      repository.project,
+      user.user,
       repository.repository,
       date_date,
-      repository_commit_id,
-      user.user,
-      message,
-      repository_commit_change.commit_changes
+      event,
+      event_id
     ]
   }
 }

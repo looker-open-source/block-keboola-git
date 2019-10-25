@@ -1,8 +1,8 @@
 view: repository_commit_change {
-  sql_table_name: WORKSPACE_545895473.REPOSITORY_COMMIT_CHANGE ;;
-  drill_fields: [repository_commit_change_id]
+  sql_table_name: @{SCHEMA_NAME}.REPOSITORY_COMMIT_CHANGE ;;
 
   dimension: repository_commit_change_id {
+    label: "Repository Commit Change ID"
     primary_key: yes
     type: string
     sql: ${TABLE}."REPOSITORY_COMMIT_CHANGE_ID" ;;
@@ -13,12 +13,12 @@ view: repository_commit_change {
     sql: ${TABLE}."FILE_TYPE" ;;
   }
 
-  dimension: lines_added {
+  dimension: lines_added_dimension {
     type: number
     sql: ${TABLE}."LINES_ADDED" ;;
   }
 
-  dimension: lines_removed {
+  dimension: lines_removed_dimension {
     type: number
     sql: ${TABLE}."LINES_REMOVED" ;;
   }
@@ -35,7 +35,7 @@ view: repository_commit_change {
 
   dimension: repository_commit_id {
     type: string
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}."REPOSITORY_COMMIT_ID" ;;
   }
 
@@ -44,8 +44,38 @@ view: repository_commit_change {
     sql: ${TABLE}."STATUS" ;;
   }
 
-  measure: count {
+  measure: lines_added {
+    type: sum
+    sql: ${lines_added_dimension} ;;
+    value_format: "#,##0"
+    drill_fields: [detail*]
+  }
+
+  measure: lines_removed {
+    type: sum
+    sql: ${lines_removed_dimension} ;;
+    value_format: "#,##0"
+    drill_fields: [detail*]
+  }
+
+  measure: commit_changes {
     type: count
-    drill_fields: [repository_commit_change_id, repository_commit.repository_commit_id]
+    drill_fields: [detail*]
+  }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      repository.repository,
+      user.user,
+      repository_commit.repository_commit_id,
+      repository_commit_change_id,
+      status,
+      file_type,
+      new_path,
+      old_path,
+      lines_removed,
+      lines_added
+    ]
   }
 }

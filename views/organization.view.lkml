@@ -1,8 +1,8 @@
 view: organization {
-  sql_table_name: WORKSPACE_545895473.ORGANIZATION ;;
-  drill_fields: [organization_id]
+  sql_table_name: @{SCHEMA_NAME}.ORGANIZATION ;;
 
   dimension: organization_id {
+    label: "Organization ID"
     primary_key: yes
     type: string
     sql: ${TABLE}."ORGANIZATION_ID" ;;
@@ -13,8 +13,16 @@ view: organization {
     sql: ${TABLE}."ORGANIZATION" ;;
   }
 
-  measure: count {
+  measure: organizations {
     type: count
-    drill_fields: [organization_id, user.count]
+    drill_fields: [detail*]
+  }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      organization.organization,
+      user.users
+    ]
   }
 }
