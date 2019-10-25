@@ -48,6 +48,11 @@ view: pull_request_activity {
     sql: ${TABLE}."TITLE" ;;
   }
 
+  dimension: user {
+    type: string
+    sql: ${TABLE}."USER" ;;
+  }
+
   dimension: user_id {
     type: string
     hidden: yes
