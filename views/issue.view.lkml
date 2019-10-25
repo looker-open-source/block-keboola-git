@@ -91,6 +91,20 @@ view: issue {
     sql: ${TABLE}."USER_ID" ;;
   }
 
+  measure: days_since_created {
+    type: sum
+    sql: datediff(DAY, ${created_date}, current_date) ;;
+    value_format: "#,##0"
+    drill_fields: [detail*]
+  }
+
+  measure: days_since_updated {
+    type: sum
+    sql: datediff(DAY, ${updated_date}, current_date) ;;
+    value_format: "#,##0"
+    drill_fields: [detail*]
+  }
+
   measure: issues {
     type: count
     drill_fields: [detail*]
