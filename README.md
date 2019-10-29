@@ -8,16 +8,18 @@ This Block connects to data from Keboola “Devops” Scaffolds into Looker. Its
 
 ## Data and Block Structure
 The Block contains three LookML dashboards:
-- Overview for checking recent commit/pull/issues activity and identifying unresolved issues.
-- User Activity for tracking activity of your team members.
-- Looker Repositories Activity for LookML-specific analysis
+
+*  Overview for checking recent commit/pull/issues activity and identifying unresolved issues.
+*  User Activity for tracking activity of your team members.
+*  Looker Repositories Activity for LookML-specific analysis
 
 
 The underlying model contains four main explores:
-- Repository Commit - contains commits and changes in the files..
-- Pull Request - contains pull requests and their activity (comments, approvals…).
-- Issues - contains issues and their comments.
-- Event - contains activity of your team members to track it in one place (commits, pulls, issues, comments etc.).
+
+*  Repository Commit - contains commits and changes in the files..
+*  Pull Request - contains pull requests and their activity (comments, approvals…).
+*  Issues - contains issues and their comments.
+*  Event - contains activity of your team members to track it in one place (commits, pulls, issues, comments etc.).
 
 As a standard, the data gets provided as a connection to Keboola-provided Snowflake, but it can be easily changed to your own DWH of choice during the setup.
 
