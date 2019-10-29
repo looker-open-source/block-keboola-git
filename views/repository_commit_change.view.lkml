@@ -58,6 +58,13 @@ view: repository_commit_change {
     drill_fields: [detail*]
   }
 
+  measure: lines_changed {
+    type: sum
+    sql: ${lines_added_dimension} + ${lines_removed_dimension} ;;
+    value_format: "#,##0"
+    drill_fields: [detail*]
+  }
+
   measure: commit_changes {
     type: count
     drill_fields: [detail*]
