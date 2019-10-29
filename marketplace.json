@@ -1,0 +1,35 @@
+{
+  "label": "Devops Essentials",
+  "category_label": "Models",
+  "branding": {
+    "image_uri": "https://www.keboola.com/data/poweredByKeboola.png",
+    "tagline": "Analyzing your Git repositories can help you track the state of your development, highlight unresolved issues and see the workload of your team. Visualized all in one place, it can help you track the development progress and serves as a source for better task distribution."
+  },
+
+  "constants": {
+    "CONNECTION": {
+      "label": "Connection Name",
+      "value_constraint": "connection"
+    },
+    "SCHEMA_NAME": {
+      "label": "Schema Name"
+    },
+    "CONFIG_PROJECT_NAME": {
+      "label": "Config Project Name"
+    }
+  },
+  "models": [
+    {
+      "name": "block-keboola-git",
+      "connection_constant": "CONNECTION"
+    }
+  ],
+  "auxiliary_projects": [
+    {
+      "git_uri": "",
+      "git_ref": "",
+      "label": "Devops Essentials Config",
+      "constant_name": "CONFIG_PROJECT_NAME"
+    }
+  ]
+}
