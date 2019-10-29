@@ -1,4 +1,10 @@
+include: "//@{CONFIG_PROJECT_NAME}/views/pull_request.view"
+
 view: pull_request {
+  extends: [pull_request_config]
+}
+
+view: pull_request_core {
   sql_table_name: @{SCHEMA_NAME}.PULL_REQUEST ;;
   drill_fields: [pull_request_id, title]
 

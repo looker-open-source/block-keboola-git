@@ -1,4 +1,10 @@
+include: "//@{CONFIG_PROJECT_NAME}/views/organization.view"
+
 view: organization {
+  extends: [organization_config]
+}
+
+view: organization_core {
   sql_table_name: @{SCHEMA_NAME}.ORGANIZATION ;;
 
   dimension: organization_id {

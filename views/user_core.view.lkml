@@ -1,4 +1,10 @@
+include: "//@{CONFIG_PROJECT_NAME}/views/user.view"
+
 view: user {
+  extends: [user_config]
+}
+
+view: user_core {
   sql_table_name: @{SCHEMA_NAME}."USER" ;;
 
   dimension: user_id {

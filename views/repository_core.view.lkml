@@ -1,4 +1,10 @@
+include: "//@{CONFIG_PROJECT_NAME}/views/repository.view"
+
 view: repository {
+  extends: [repository_config]
+}
+
+view: repository_core {
   sql_table_name: @{SCHEMA_NAME}.REPOSITORY ;;
   drill_fields: [repository]
 

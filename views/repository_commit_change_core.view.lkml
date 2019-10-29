@@ -1,4 +1,10 @@
+include: "//@{CONFIG_PROJECT_NAME}/views/repository_commit_change.view"
+
 view: repository_commit_change {
+  extends: [repository_commit_change_config]
+}
+
+view: repository_commit_change_core {
   sql_table_name: @{SCHEMA_NAME}.REPOSITORY_COMMIT_CHANGE ;;
 
   dimension: repository_commit_change_id {

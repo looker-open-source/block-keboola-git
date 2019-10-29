@@ -1,4 +1,10 @@
+include: "//@{CONFIG_PROJECT_NAME}/views/pull_request_activity.view"
+
 view: pull_request_activity {
+  extends: [pull_request_activity_config]
+}
+
+view: pull_request_activity_core {
   sql_table_name: @{SCHEMA_NAME}.PULL_REQUEST_ACTIVITY ;;
 
   dimension: pull_request_activity_id {

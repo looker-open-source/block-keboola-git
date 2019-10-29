@@ -1,4 +1,10 @@
+include: "//@{CONFIG_PROJECT_NAME}/views/issue_comment.view"
+
 view: issue_comment {
+  extends: [issue_comment_config]
+}
+
+view: issue_comment_core {
   sql_table_name: @{SCHEMA_NAME}.ISSUE_COMMENT ;;
   drill_fields: [issue_comment_id, description]
 
