@@ -1,4 +1,4 @@
-include: "//@{CONFIG_PROJECT_NAME}/views/issue_comment.view"
+include: "//@{CONFIG_PROJECT_NAME}/issue_comment.view"
 
 view: issue_comment {
   extends: [issue_comment_config]

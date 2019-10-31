@@ -1,4 +1,4 @@
-include: "//@{CONFIG_PROJECT_NAME}/views/user.view"
+include: "//@{CONFIG_PROJECT_NAME}/user.view"
 
 view: user {
   extends: [user_config]

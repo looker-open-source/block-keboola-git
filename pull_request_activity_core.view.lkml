@@ -1,4 +1,4 @@
-include: "//@{CONFIG_PROJECT_NAME}/views/pull_request_activity.view"
+include: "//@{CONFIG_PROJECT_NAME}/pull_request_activity.view"
 
 view: pull_request_activity {
   extends: [pull_request_activity_config]

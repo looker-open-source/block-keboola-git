@@ -27,7 +27,7 @@
   "auxiliary_projects": [
     {
       "git_uri": "git://github.com/llooker/block-keboola-git-config.git",
-      "git_ref": "62fbfe69763b02577254e0615380b2fd805ba799",
+      "git_ref": "19a8172779cb82a1108044e0c70c43e35c6743ed",
       "label": "DevOps Essentials by Keboola Config",
       "constant_name": "CONFIG_PROJECT_NAME"
     }

@@ -1,4 +1,4 @@
-include: "//@{CONFIG_PROJECT_NAME}/views/repository_commit.view"
+include: "//@{CONFIG_PROJECT_NAME}/repository_commit.view"
 
 view: repository_commit {
   extends: [repository_commit_config]

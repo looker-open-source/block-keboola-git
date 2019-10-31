@@ -1,4 +1,4 @@
-include: "//@{CONFIG_PROJECT_NAME}/views/organization.view"
+include: "//@{CONFIG_PROJECT_NAME}/organization.view"
 
 view: organization {
   extends: [organization_config]
