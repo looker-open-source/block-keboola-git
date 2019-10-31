@@ -43,11 +43,12 @@ connection: "@{CONNECTION}"
 
 label: "Block Keboola Git Essentials"
 
-include: "/views/**/*.view"
-include: "/explores/**/*.explore.lkml"
+include: "*.view"
+include: "*.explore.lkml"
 include: "*.dashboard.lookml"
 include: "//@{CONFIG_PROJECT_NAME}/views/**/*.view.lkml"
 include: "//@{CONFIG_PROJECT_NAME}/*.model.lkml"
+include: "//@{CONFIG_PROJECT_NAME}/*.dashboard.lkml"
 
 explore: event {
   extends: [event_config]
