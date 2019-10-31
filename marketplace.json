@@ -1,5 +1,5 @@
 {
-  "label": "Devops Essentials by Keboola",
+  "label": "DevOps Essentials by Keboola",
   "category_label": "Models",
   "branding": {
     "image_uri": "https://www.keboola.com/data/poweredByKeboola.png",
@@ -26,9 +26,9 @@
   ],
   "auxiliary_projects": [
     {
-      "git_uri": "",
-      "git_ref": "",
-      "label": "Devops Essentials by Keboola Config",
+      "git_uri": "git://github.com/llooker/block-keboola-git-config.git",
+      "git_ref": "62fbfe69763b02577254e0615380b2fd805ba799",
+      "label": "DevOps Essentials by Keboola Config",
       "constant_name": "CONFIG_PROJECT_NAME"
     }
   ]
