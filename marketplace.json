@@ -2,7 +2,7 @@
   "label": "DevOps Essentials by Keboola",
   "category_label": "Models",
   "branding": {
-    "image_uri": "https://www.keboola.com/data/poweredByKeboola.png",
+    "image_uri": "https://marketplace-api.looker.com/block-icons/KeboolaBrand.png",
     "tagline": "Analyzing your Git repositories can help you track the state of your development, highlight unresolved issues and see the workload of your team. Visualized all in one place, it can help you track the development progress and serves as a source for better task distribution."
   },
 
