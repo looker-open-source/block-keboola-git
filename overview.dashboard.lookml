@@ -10,7 +10,7 @@
     col: 18
     width: 6
     height: 2
-  - name: 'scaffold'
+  - name: 'block'
     type: text
     title_text: ''
     subtitle_text: <font size="5px"><font color="#408ef7"><b>Git</b></font>
@@ -88,12 +88,12 @@
       Date: event.date_date
       Organization: organization.organization
       User: user.user
-    row: 2
-    col: 12
-    width: 12
+    row: 4
+    col: 0
+    width: 24
     height: 7
   - title: Commits
-    name: Commits
+    name: Commits KPI
     model: block_keboola_git
     explore: repository_commit
     type: single_value
@@ -104,11 +104,11 @@
       Organization: organization.organization
       User: user.user
     row: 2
-    col: 6
-    width: 3
+    col: 12
+    width: 6
     height: 2
   - title: Pull Requests
-    name: Pull Requests
+    name: Pull Requests KPI
     model: block_keboola_git
     explore: pull_request
     type: single_value
@@ -119,11 +119,11 @@
       Organization: organization.organization
       User: user.user
     row: 2
-    col: 3
-    width: 3
+    col: 6
+    width: 6
     height: 2
   - title: Issues
-    name: Issues
+    name: Issues KPI
     model: block_keboola_git
     explore: issue
     type: single_value
@@ -134,8 +134,8 @@
       Organization: organization.organization
       User: user.user
     row: 2
-    col: 9
-    width: 3
+    col: 18
+    width: 6
     height: 2
   - title: New Repositories
     name: New Repositories
@@ -148,12 +148,12 @@
       Date: repository.created_date
     row: 2
     col: 0
-    width: 3
+    width: 6
     height: 2
-  - name: Pull Requests Section
+  - name: Pull Requests
     type: text
     title_text: Pull Requests
-    row: 14
+    row: 18
     col: 0
     width: 24
     height: 2
@@ -214,7 +214,7 @@
       Date: pull_request.created_date
       Organization: organization.organization
       User: user.user
-    row: 16
+    row: 20
     col: 12
     width: 12
     height: 7
@@ -275,14 +275,14 @@
       Date: pull_request.created_date
       Organization: organization.organization
       User: user.user
-    row: 16
+    row: 20
     col: 0
     width: 12
     height: 7
-  - name: Commits Section
+  - name: Commits
     type: text
     title_text: Commits
-    row: 23
+    row: 27
     col: 0
     width: 24
     height: 2
@@ -345,14 +345,14 @@
       Date: issue.created_date
       Organization: organization.organization
       User: user.user
-    row: 34
+    row: 38
     col: 12
     width: 12
     height: 7
-  - name: Issues Section
+  - name: Issues
     type: text
     title_text: Issues
-    row: 32
+    row: 36
     col: 0
     width: 24
     height: 2
@@ -415,10 +415,43 @@
       Date: issue.created_date
       Organization: organization.organization
       User: user.user
-    row: 34
+    row: 38
     col: 0
     width: 12
     height: 7
+  - title: Issues Open For More Than 30 Days
+    name: Issues Open For More Than 30 Days
+    model: block_keboola_git
+    explore: issue
+    type: table
+    fields: [repository.repository, issue.title, issue.kind, issue.days_since_created,
+      issue.days_since_updated]
+    filters:
+      issue.state: new
+      issue.days_since_created: ">30"
+    sorts: [issue.days_since_created desc]
+    limit: 500
+    show_view_names: false
+    show_row_numbers: false
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: gray
+    limit_displayed_rows: false
+    enable_conditional_formatting: true
+    conditional_formatting: [{type: along a scale..., value: !!null '', background_color: "#62bad4",
+        font_color: !!null '', color_application: {collection_id: legacy, palette_id: legacy_sequential3,
+          options: {steps: 5, reverse: true, constraints: {min: {type: number, value: 30}}}},
+        bold: false, italic: false, strikethrough: false, fields: !!null ''}]
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    listen:
+      Organization: organization.organization
+      User: user.user
+    row: 11
+    col: 0
+    width: 12
+    height: 5
   - title: Commits by Repository (TOP 10)
     name: Commits by Repository (TOP 10)
     model: block_keboola_git
@@ -473,7 +506,7 @@
       Date: repository_commit.date_date
       Organization: organization.organization
       User: user.user
-    row: 25
+    row: 29
     col: 0
     width: 12
     height: 7
@@ -532,7 +565,7 @@
       Date: repository_commit.date_date
       Organization: organization.organization
       User: user.user
-    row: 25
+    row: 29
     col: 12
     width: 12
     height: 7
@@ -565,79 +598,10 @@
     listen:
       Organization: organization.organization
       User: user.user
-    row: 9
-    col: 0
-    width: 12
-    height: 5
-  - title: Commits With Over 2k LOC Changed
-    name: Commits With Over 2k LOC Changed
-    model: block_keboola_git
-    explore: repository_commit
-    type: table
-    fields: [repository_commit_change.lines_changed, repository.repository, repository_commit.repository_commit_id]
-    filters:
-      repository_commit_change.lines_changed: ">2000"
-    sorts: [repository_commit_change.lines_changed desc]
-    limit: 500
-    color_application:
-      collection_id: legacy
-      palette_id: looker_classic
-    show_view_names: false
-    show_row_numbers: true
-    truncate_column_names: false
-    hide_totals: false
-    hide_row_totals: false
-    table_theme: gray
-    limit_displayed_rows: false
-    enable_conditional_formatting: true
-    conditional_formatting: [{type: along a scale..., value: !!null '', background_color: "#62bad4",
-        font_color: !!null '', color_application: {collection_id: legacy, palette_id: legacy_sequential3,
-          options: {steps: 5, constraints: {min: {type: number, value: 2000}}, reverse: true}},
-        bold: false, italic: false, strikethrough: false, fields: !!null ''}]
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    series_types: {}
-    listen:
-      Date: repository_commit.date_date
-      Organization: organization.organization
-      User: user.user
-    row: 9
+    row: 11
     col: 12
     width: 12
-    height: 5
-  - title: Issues Open For More Than 30 Days
-    name: Issues Open For More Than 30 Days
-    model: block_keboola_git
-    explore: issue
-    type: table
-    fields: [repository.repository, issue.title, issue.kind, issue.days_since_created,
-      issue.days_since_updated]
-    filters:
-      issue.state: new
-      issue.days_since_created: ">30"
-    sorts: [issue.days_since_created desc]
-    limit: 500
-    show_view_names: false
-    show_row_numbers: false
-    truncate_column_names: false
-    hide_totals: false
-    hide_row_totals: false
-    table_theme: gray
-    limit_displayed_rows: false
-    enable_conditional_formatting: true
-    conditional_formatting: [{type: along a scale..., value: !!null '', background_color: "#62bad4",
-        font_color: !!null '', color_application: {collection_id: legacy, palette_id: legacy_sequential3,
-          options: {steps: 5, reverse: true, constraints: {min: {type: number, value: 30}}}},
-        bold: false, italic: false, strikethrough: false, fields: !!null ''}]
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    listen:
-      Organization: organization.organization
-      User: user.user
-    row: 4
-    col: 0
-    width: 12
-    height: 5
+    height: 7
   filters:
   - name: Date
     title: Date

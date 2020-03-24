@@ -7,16 +7,15 @@ Looker Blocks powered by Keboola are designed to work in tandem with correspondi
 This Block connects to data from Keboola “Devops” Scaffolds into Looker. Its purpose is to provide quick out-of-the-box end-to-end integration and functionality to be used either stand-alone or to be combined with other data, into scorecards, etc. In order to set up the Keboola data feed, please contact us: [here](https://get.keboola.com/lookerblocks?block=devops_essentials).
 
 ## Data and Block Structure
-The Block contains three LookML dashboards:
+The Block contains two LookML dashboards:
 
 *  Overview for checking recent commit/pull/issues activity and identifying unresolved issues.
 *  User Activity for tracking activity of your team members.
-*  Looker Repositories Activity for LookML-specific analysis
 
 
 The underlying model contains four main explores:
 
-*  Repository Commit - contains commits and changes in the files..
+*  Repository Commit - contains commits and info about repositories.
 *  Pull Request - contains pull requests and their activity (comments, approvals…).
 *  Issues - contains issues and their comments.
 *  Event - contains activity of your team members to track it in one place (commits, pulls, issues, comments etc.).

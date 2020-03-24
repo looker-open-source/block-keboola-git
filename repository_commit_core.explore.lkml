@@ -25,10 +25,4 @@ explore: repository_commit_core {
     sql_on: ${organization_user.organization_id} = ${organization.organization_id} ;;
     relationship: many_to_one
   }
-
-  join: repository_commit_change {
-    type: left_outer
-    sql_on: ${repository_commit.repository_commit_id} = ${repository_commit_change.repository_commit_id} ;;
-    relationship: one_to_many
-  }
 }

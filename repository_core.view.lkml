@@ -45,11 +45,6 @@ view: repository_core {
     sql: ${TABLE}."HAS_WIKI" = 'true' ;;
   }
 
-  dimension: is_looker {
-    type: yesno
-    sql: ${TABLE}."IS_LOOKER" = 'true' ;;
-  }
-
   dimension: is_private {
     type: yesno
     sql: ${TABLE}."IS_PRIVATE" = 'true' ;;
