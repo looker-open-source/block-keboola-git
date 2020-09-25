@@ -97,17 +97,19 @@ view: issue_core {
     sql: ${TABLE}."USER_ID" ;;
   }
 
-  measure: days_since_created {
-    type: sum
-    sql: datediff(DAY, ${created_date}, current_date) ;;
-    value_format: "#,##0"
+  dimension_group: since_created {
+    type: duration
+    intervals: [day]
+    sql_start: ${TABLE}."CREATED_ON" ;;
+    sql_end: current_date ;;
     drill_fields: [detail*]
   }
 
-  measure: days_since_updated {
-    type: sum
-    sql: datediff(DAY, ${updated_date}, current_date) ;;
-    value_format: "#,##0"
+  dimension_group: since_updated {
+    type: duration
+    intervals: [day]
+    sql_start: ${TABLE}."UPDATED_ON" ;;
+    sql_end: current_date ;;
     drill_fields: [detail*]
   }
 
